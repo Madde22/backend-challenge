@@ -10,6 +10,8 @@ For the web serving part you could use either
 
 Please include a middleware for logging on all requests
 
+The register endpoint ( `POST /register` ) should register a user with username and password.
+
 The login endpoint ( `POST /login` ) should return a signed JWT token on correct username/password.
 
 The token should be signed and the signing secret should be provided via config.
