@@ -1,0 +1,341 @@
+{% extends 'formtype/base.html' %}
+{% load static %}
+
+{%block css%}
+<style>
+    .collapse, .collapsing {
+      margin-top:10px;
+      border:0px;
+    }
+
+@media (max-width: 480px){
+   .slick-dots {
+    position: absolute;
+    top: 80%;
+    display: block;
+    width: 100%;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+}
+
+}
+
+    .signin-btn{
+        width: 100%;
+
+    }
+    .container > .navbar-header, .container-fluid > .navbar-header, .container > .navbar-collapse, .container-fluid > .navbar-collapse {
+    margin-right: -15px;
+    margin-left: -15px;
+    margin-bottom: 5px;
+}
+
+
+
+  </style>
+{%endblock%}
+
+
+
+{%block content%}
+
+
+
+<!-- Start single page header -->
+<section id="single-page-header">
+    <div class="overlay">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                    <div class="single-page-header-left">
+                        <h2>Sayfa Bulunamadı</h2>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="single-page-header-right">
+                        <ol class="breadcrumb">
+
+                            <li class="active">404</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+  <!-- End single page header -->
+
+
+    {%endblock%}
+
+
+<script>
+
+    $(document).ready(function(){
+
+        $("#subscribe-btn").click(function(e) {
+
+
+         $.ajax({
+                    url: 'https://www.oscararastirma.com/subscribe/', // the endpoint
+                    type: 'POST', // http method
+                    data: $('#subscribe-form').serialize(), // data sent with the post request
+
+                    // handle a successful response
+                    success: function (response) {
+                        console.log(response);
+
+                        if(response.status == "success")
+                        {
+                            $("#subscribe-area").html("<h1><span style='color: green'>"+response.message+"</span></h1>");
+
+                        }
+                        else if(response.status == "error")
+                            $("#subscribe-error").html("<h1><span style='color: red'>"+response.message+"</span></h1>");
+                    },
+                    error: function (response) {
+                         $("#subscribe-error").html("<h1><span style='color: red'>"+response.message+"</span></h1>");
+
+                    }
+                });
+
+
+
+        });
+
+
+       // jQuery methods go here...
+        $("#gizlimusteriol2").click(function(e){
+            $("#login-form").modal();
+            $("#login-content").css("display","none");
+            $("#signup-content").css("display","block");
+
+
+        });
+
+
+
+    });
+
+
+
+
+    $('body').on('click','#mylogin_btn',function(e) {
+
+        e.preventDefault();
+
+        var email = $("#myloginemail").val();
+        var password =$("#myloginpassword").val();
+
+
+
+        if(email=="" || !email.includes('@'))
+        {
+            $("#loginemailerror").show();
+            return;
+        }
+        else
+            $("#loginemailerror").css("display","none");
+
+        if(password== "" |password ==null)
+        {
+            $("#loginpassworderror").show();
+            return;
+        }
+        else
+            $("#loginpassworderror").css("display","none");
+
+
+
+        $.ajax({
+            url: 'https://www.oscararastirma.com/login/', // the endpoint
+            type: 'POST', // http method
+            data: $('#myloginform').serialize(), // data sent with the post request
+
+           // handle a successful response
+           success: function (response) {
+
+               console.log(response);
+               if(response.status == "success")
+               {
+                   $("#myloginwarning").html("<h1><span style='color: green'>"+response.message+"</span></h1>");
+                   window.setTimeout(function(){
+                        // Move to a new location or you can do something else
+                        window.location.replace("https://www.oscararastirma.com/profile/")
+                    }, 2000);
+
+               }
+
+               else if(response.status == "error")
+                  $("#myloginwarning").html("<h1><span style='color: red'>"+response.message+"</span></h1>");
+           },
+           error: function (response) {
+                $("#myloginwarning").html("<h1><span style='color: red'>Oops! Bir hata oluştu.Lütfen site yöneticisi ile İrtibat kurunuz.</span></h1>");
+
+                    }
+                });
+
+});
+
+    $('body').on('click','#gizli_kaydol',function(e) {
+
+           e.preventDefault();
+
+           var email = $("#gizliemail").val();
+           var telefon = $("#gizlimobile").val();
+           var password= $("#gizlipassword").val();
+           var passwordtekrar =$("#gizlipasswordtekrar").val();
+
+
+
+          if(email==""||email==null||!email.includes('@'))
+          {
+              $("#signupemailerror").show();
+              return;
+          }
+          else
+              $("#signupemailerror").css("display","none");
+
+         if(telefon==""||telefon==null)
+         {
+              $("#signupmobileerror").show();
+              return;
+         }
+         else
+             $("#signupmobileerror").css("display","none");
+
+
+
+         if(password == "" ||password ==null)
+         {
+             $("#signuppassworderror").show();
+             return;
+         }
+         else
+             $("#signuppassworderror").css("display","none");
+
+
+         if(passwordtekrar==""||passwordtekrar==null|| !(passwordtekrar==password))
+         {
+             $("#signuppasswordtekrarerror").show();
+             return;
+         }
+         else
+             $("#signuppasswordtekrarerror").css("display","none");
+
+
+
+         $.ajax({
+                    url: 'https://www.oscararastirma.com/signup/', // the endpoint
+                    type: 'POST', // http method
+                    data: $('#mysignupform').serialize(), // data sent with the post request
+
+                    // handle a successful response
+                    success: function (response) {
+
+
+                        if(response.status == "success")
+                        {
+                            $("#mygizliwarning").html("<h1><span style='color: green'>"+response.message+"</span></h1>");
+                             setTimeout(function(){
+                            $("#loginmodal").modal('toggle');
+                        }, 5000);
+
+
+
+                        }
+                        else if(response.status == "error")
+                            $("#mygizliwarning").html("<h1><span style='color: red'>"+response.message+"</span></h1>");
+                    },
+                    error: function (response) {
+                        console.log(response);
+
+                    }
+                });
+
+          });
+
+</script>
+<script>
+  $(document).ready(function(){
+
+
+
+
+         $('body').on('click','#comment-btn',function(e)
+        {
+            e.preventDefault();
+            alert("Mesaj gönderiliyor....");
+            $.ajax({
+            url: 'https://www.oscararastirma.com/iletisim/', // the endpoint
+            type: 'POST', // http method
+            data: $('#contactform').serialize(), // data sent with the post request
+
+           // handle a successful response
+           success: function (response) {
+
+               console.log(response);
+               if(response.status == "success")
+               {
+                   $("#contactarea").html("<h1><span style='color: green'>"+response.message+"</span></h1>");
+                    $("#contactarea").append('<button id="refresh-btn" class="comment-btn">Yeni Mesaj</button>');
+               }
+
+               else if(response.status == "error")
+               {
+                    $("#contact-error").html("<h1><span style='color: red'>"+response.message+"</span></h1>");
+
+
+               }
+           },
+           error: function (response) {
+                $("#contact-error").html("<h1><span style='color: red'>Oops! Bir hata oluştu.Lütfen site yöneticisi ile İrtibat kurunuz.</span></h1>");
+
+                    }
+                });
+
+
+        });
+
+              $('body').on('click','#refresh-btn',function(){
+
+                $("#contactarea").html('<form id="contactform" class="comments-form contact-form">'+
+                                    '<div class="form-group">'+
+                                       ' <input type="text" name="adsoyad" class="form-control" placeholder="Adınız ve Soyadınız">'+
+                                    '</div>'+
+                                    '<div class="form-group">'+
+                                        '<input type="email" name="email" class="form-control" placeholder="Eposta">'+
+                                    '</div>'+
+                                    '<div class="form-group">'+
+                                       ' <input type="text" name="konu" class="form-control" placeholder="Hangi Konu İle Alakalı">'+
+                                    '</div>'+
+                                    '<div class="form-group">'+
+                                        '<textarea name="mesaj" placeholder="Mesajınız" rows="3"  maxlength="1000" class="form-control"></textarea>'+
+                                    '</div>'+
+                                    '<div class="row">'+
+                                        '<div class="col-md-6">'+
+                                             '<div id="myCaptcha" class="g-recaptcha"></div>'+
+                                        '</div>'+
+                                        '<div class="col-md-6">'+
+                                            '<button id="comment-btn" class="comment-btn">GÖNDER</button>'+
+                                        '</div>'+
+                                    '</div>'+
+                                '</form>');
+
+
+                var captchaWidgetId = grecaptcha.render( 'myCaptcha', {
+                      'sitekey' : '6LeOQm8UAAAAADnuv8mk81I-WQARgCr16RtGuuNy',  // required
+
+                    });
+            });
+
+
+
+
+    });
+
+</script>
+
+
+
