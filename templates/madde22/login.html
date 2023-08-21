@@ -1,0 +1,200 @@
+
+{% extends 'formtype/base.html' %}
+{% load static %}
+
+
+{%block css%}
+     <link rel="stylesheet" href="{%static 'formtype/yonetim/plugins/sweetAlert/sweetalert2.min.css' %}">
+
+<style>
+
+.loginbox .signin-btn,.form-control,.input-lg {
+    border-radius: 0!important;
+    margin-top: 10px;
+
+}
+#sisteme_giris{
+    background-color: #37c6f5;
+    color: white;
+    font-weight: bold;
+}
+.myu li:before {
+  content: '✓  ';
+  color:#c762cb;
+}
+.overlay
+{
+padding:4px 10px 0 10px;
+}
+</style>
+{%endblock%}
+
+{%block content%}
+
+<!-- Start single page header -->
+<section id="single-page-header">
+    <div class="overlay">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="single-page-header-left">
+                        <h2 style="padding-bottom:0">GİZLİ MÜSTERİ Sisteme Giriş</h2>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="single-page-header-right">
+                        <ol class="breadcrumb">
+                            <li><a href="{{ ROOT }}">ANASAYFA</a></li>
+                            <li class="active">Sisteme Giriş</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container" id="mycontent" style="margin-bottom:10% ">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6" id="my_login__div" style="margin-top:5% ">
+            {% if status == "success" %}
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h4><i class="icon fa fa-check"></i> Tebrikler!</h4>
+                {{ message }}
+                <script>
+                     // Your application has indicated there's an error
+                    window.setTimeout(function(){
+                        console.log("Role =  {{ user.profile.rol }}");
+                        {% if user.profile.rol == 0 or user.profile.rol == '0' or user.profile.rol == 'SuperAdmin' %}
+                            window.location.href = "{{ ROOT }}/oscar-admin/";
+                        {% elif user.profile.rol == 1 or user.profile.rol == '1' or user.profile.rol == 'Müşteri' %}
+                            window.location.href = "{{ ROOT }}/oscar-musteri/";
+                        {% else %}
+                            window.location.href = "{{ ROOT }}/oscar-gizli-musteri/";
+                        {% endif %}
+                    }, 1500);
+                </script>
+            </div>
+            {% elif status == "error" %}
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h4><i class="icon fa fa-check"></i> Hata!</h4>
+                {{ message }}
+            </div>
+            {% endif %}
+            <h2 style="text-align: center;color:blue;padding-bottom:0">Giriş Formu</h2>
+            <form id="my_login_form"  method="post" action="{{ ROOT }}/login/">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input id="my_login_email" type="text" placeholder="Kullanıcı Adı/Eposta" class="form-control input-lg" name="username">
+                    <p id="loginemailerror" style="color: red;display: none;margin-left:1%">Eposta Hatalı</p>
+                </div>
+                <div class="form-group">
+                    <input id="my_login_password"  type="password" placeholder="Şifre" class="form-control input-lg" name="password">
+                    <span toggle="#my_login_password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                    <p id="loginpassworderror" style="color: red;display: none;margin-left:1%">Şifre Boş Olamaz</p>
+                </div>
+                <div  class="g-recaptcha" data-sitekey="6LeOQm8UAAAAADnuv8mk81I-WQARgCr16RtGuuNy"></div>
+                <div class="loginbox">
+                    <button id="my_login__btn" class="btn btn-lg signin-btn" type="submit">GİRİŞ</button>
+                </div>
+            </form>
+            <div>
+                <a id="forgetpassword-btn" href="#">Şifremi Unuttum ?</a>
+                <span>Bir Hesabınız Yok Mu? <a  href="{{ ROOT }}/gizli-musteri-kayit/">Kayıt Ol</a></span>
+            </div>
+            <div id="my_login_warning" style="display: none"></div>
+        </div>
+        <div class="col-md-6" id="myforget_password_div" style="margin-top:5%;display: none">
+            <h4 style="margin: 2%;color:red"><i class="fa fa-lock"></i>ŞİFREMİ UNUTTUM</h4>
+            <form id="forgetpassword-form" method="post" action="{{ ROOT }}/sifremi-sifirla/">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input placeholder="Kulanıcı Adı/Eposta" class="form-control input-lg" id="forgetpasswordemail" name="email"><p id="forgetpasswordemailerror" style="color: red;display: none;margin-left:1%">Eposta Hatalı</p>
+                </div>
+                <div  class="g-recaptcha" data-sitekey="6LeOQm8UAAAAADnuv8mk81I-WQARgCr16RtGuuNy"></div>
+                <div class="loginbox">
+                    <button id="rememberpassword" class="btn signin-btn btn-lg" type="submit">ŞİFREMİ SIFIRLA</button>
+                </div>
+                 <div>
+                <a id="giris-yap-btn" href="#">Giriş Yap</a>
+                <span>Bir Hesabınız Yok Mu? <a  href="{{ ROOT }}/gizli-musteri-kayit/">Kayıt Ol</a></span>
+                </div>
+                <div id="forgetpasswordwarning">
+                </div>
+            </form>
+         </div>
+         <div class="col-md-3"></div>
+    </div>
+</div>
+    <!-- Sweet Alert -->
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+<script src="{%static 'formtype/yonetim/plugins/sweetAlert/sweetalert2.min.js' %}"></script>
+{%endblock%}
+
+{%block js%}
+    <script>
+        $(document).ready(function(){
+            $("li.mynav").each(function (e) {
+                $(this).removeClass("active");
+            });
+
+            $("#gizlimuserikayit").removeClass("active");
+            $("#sisteme_giris").addClass("active");
+
+            $("#giris-yap-btn").click(function(e){
+               $("#myforget_password_div").css("display","none");
+               $("#my_login__div").css("display","block");
+
+                });
+            $("#forgetpassword-btn").click(function(e){
+              $("#my_login__div").css("display","none");
+              $("#myforget_password_div").css("display","block");
+            });
+
+            $('.myinput').keyup(function() {
+                $(this).val( ($(this).val()).toLowerCase());
+            });
+
+            const elems = document.getElementsByClassName("mynav");
+
+            for(let i=0; i<elems.length; i++) {
+                $(elems[i]).removeClass("active");
+                $($(elems[i]).data("parent")).removeClass("active");
+            }
+
+            $(".toggle-password").click(function() {
+                $(this).toggleClass("fa-eye fa-eye-slash");
+                const input = $($(this).attr("toggle"));
+
+                if (input.attr("type") === "password") {
+                    input.attr("type", "text");
+                } else {
+                    input.attr("type", "password");
+                }
+            });//end of toogle-password
+
+           $("#login-content").css("display","block");
+           $("#forget-password-content").css("display","none");
+        });
+    </script>
+    <script>
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = jQuery.trim(cookies[i]);
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+    </script>
+
+{%endblock%}

@@ -1,0 +1,512 @@
+{% extends 'formtype/base.html' %}
+{% load static %}
+
+
+{%block css%}
+<style>
+#slider div ul.slick-dots
+{
+  top:75%; !important
+}
+.blog-news-title {
+    padding: 20px 5px 15px;
+}
+.mysmall{
+    color: white !important;
+}
+
+.slide-article {
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 75px;
+    width: 100%;
+}
+
+@media (min-width: 991px) {
+    .slide-article {
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 75px;
+    width: 100%;
+        font-size: 45px;
+    }
+    .mysmall{
+     font-size: 30px  !important;
+}
+
+       .blog-more-btn, .blog-more-btn:focus, .blog-more-btn:hover {
+    text-decoration: none;
+    outline: 0;
+    background: #37c6f5;
+    color: white;
+    position: absolute;
+           bottom: 2px;
+           padding: 5px;
+           margin: 2px;
+}
+}
+@media (max-width: 480px){
+
+    .read-more-btn {
+    font-size: 9px;
+    padding: 3px 1px;
+        margin-top: -3px;
+    }
+
+
+}
+
+
+@media (max-width: 991px){
+    .slide-article h1 {
+    font-size: 20px;
+    line-height: 20px;
+
+}
+    .slide-article {
+    padding-left: 0px;
+    padding-right: 0;
+    padding-top: 50px;
+        font-size: 30px;
+}
+     .mysmall{
+     font-size: 16px  !important;
+}
+
+     .blog-more-btn,.blog-more-btn:focus, .blog-more-btn:hover {
+    text-decoration: none;
+    outline: 0;
+    padding: 5px;
+    background: #37c6f5;
+    color: white;
+    position: absolute;
+
+}
+}
+
+@media (max-width: 767px) {
+    .slide-article {
+    padding-left: 0px;
+    padding-right: 0;
+    padding-top: 0px;
+    font-size: 25px;
+}
+    .blog-more-btn, .blog-more-btn:focus, .blog-more-btn:hover {
+    text-decoration: none;
+    outline: 0;
+    padding: 5px;
+    background: #37c6f5;
+    color: white;
+    position: absolute;
+}
+     .mysmall{
+     font-size: 12px  !important;
+}
+
+
+    .read-more-btn {
+    font-size: 9px;
+    padding: 10px 6px;
+        margin-top: -3px;
+    }
+}
+
+@media (max-width: 400px) {
+   .slide-article {
+    padding-left: 0px;
+    padding-right: 0;
+    padding-top: 0px;
+    font-size: 12px;
+}
+
+    .mysmall{
+     font-size: 9px  !important;
+}
+}
+
+
+
+.blog-news-single{
+    border:2px solid #37c6f5;
+}
+.single-brand{
+    background-color:#f8f8f8;
+    border:1px solid #ccc;
+    height:120px;
+    padding:0;
+    text-align:center}
+.blog-news-title h2, .blog-news-title h2>a {
+    color: #838282;
+    font-family: Lato, sans-serif;
+    font-size: 17px;
+}
+.company-references-item{
+    border: 1px solid #DDDDDD;
+    height: 132px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    padding: 15px;
+    box-sizing: border-box;
+}
+.my_img {
+  -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%);
+    max-width: 230px;
+    max-height: 120px;
+}
+.my_img:hover{
+      filter: none;
+  -webkit-filter: grayscale(0%);
+     max-width: 230px;
+    max-height: 120px;
+}
+</style>
+{%endblock%}
+
+
+
+  
+
+{%block content%}
+
+  <!-- Start slider -->
+    <section id="slider" style="max-height:500px">
+    <div class="main-slider">
+
+      {%for slide in slides %}
+      <div class="single-slide">
+
+       {%if slide.backgroundphoto %}
+           <img src="{{slide.backgroundphoto.url}}" alt="{{slide.adi}}">
+        {%else%}
+       <img  src="{%static 'formtype/home/images/no-image.png' %}" alt="no-image">
+          {%endif%}
+
+
+
+        <div class="slide-content">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12 col-sm-12">
+
+                <div class="slide-article">
+                    {%if slide.biggerwritten%}
+                  <h1 class="wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.5s">{{slide.biggerwritten|safe}}</h1>
+                    {%endif%}
+                </div>
+              </div>
+
+              <div class="col-md-6 col-sm-9 col-xs-9">
+
+                    {%if slide.smallwritten%}
+                  <p class="wow fadeInUp mysmall" data-wow-duration="0.5s" data-wow-delay="0.9s">{{slide.smallwritten|safe}}</p>
+                    {%endif%}
+
+                    {%if slide.readmore and not slide.readmore == ""%}
+                  <a class="read-more-btn wow fadeInUp" data-wow-duration="1s" data-wow-delay="1s" href="{{slide.readmore}}">Daha Fazlası İçin</a>
+                    {%endif%}
+                </div>
+              </div>
+                {%if slide.fadeinphoto %}
+            <div class="row">
+              <div class="col-md-6 col-sm-6">
+                <div class="slider-img wow fadeInUp">
+                  <img src="{{ROOT}}/{{slide.fadeinphoto}}" alt="fade-in-photo">
+                </div>
+              </div>
+            </div>
+                {%endif%}
+
+          </div>
+        </div>
+      </div>
+        {%endfor%}
+
+
+
+
+    </div>
+    </section>
+
+    <section>
+        <div class="container" >
+            <div class="row">
+                <div class="col-md-4 col-md-offset-2">
+                    <article class="blog-news-single" style="height:420px;border: 2px solid #37c6f5">
+                        <div style="text-align: center;margin-top: 18px">
+                            <a href="gizli-musteri-arastirmasi">
+                                <i style="font-size:120px;text-align: center" class="fa fa-user-secret"></i>
+                            </a>
+                        </div>
+                        <div class="blog-news-title">
+                            <h2 style="text-align:center">
+                                <a href="gizli-musteri-arastirmasi">
+                                    <span style="color:#37c6f5;font-family:Verdana,Geneva,sans-serif;background-color:#ffffff">GİZLİ MÜŞTERİ</span>
+                                </a>
+                            </h2>
+                        </div>
+                        <div class="blog-news-details" >
+                            <p></p>
+                            <p style="margin-left:0; margin-right:0">
+                                Binlerce gizli müşteri ve gölge müşteri aracılığıyla firmanızın bayi
+                                ve şubelerindeki hizmet kalitesini denetleyin.
+                            </p>
+                            <a class="blog-more-btn" href="gizli-musteri-arastirmasi">
+                                Detaylı bilgi edinin<i class="fa fa-long-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+                 <div class="col-md-4">
+                    <article class="blog-news-single"  style="height:420px;border: 2px solid #37c6f5">
+                        <div style="text-align: center">
+                            <a href="/pazar-arastirmasi">
+                                <img style="margin-top:1px;width:100%;text-align: center" src="/media/pazar_arastirmasi.png">
+                            </a>
+                        </div>
+                        <div class="blog-news-title" style="padding-top: 0px!important;">
+                        <h2><a href="/pazar-arastirmasi">
+                            <h2 style="text-align:center">
+                            <span style="color:#37c6f5"><span style="font-family:Verdana,Geneva,sans-serif">
+                                <span style="background-color:#ffffff">Pazar Araştırması</span>
+                            </span>
+                            </span>
+                            </h2>
+                        </a>
+                        </h2>
+                        </div>
+                        <div class="blog-news-details">
+                            <p></p>
+                            <p style="margin-left:0; margin-right:0">
+                                Hizmet ve ürünlerinizin müşterilere ne derece hitap ettiğini, rakipler arasındaki
+                                konumuzu gösteren pazar araştırması oldukça avantajlı bir yöntemdir. Bu sayede işletmeniz
+                                gerekli aksiyonları alarak daha verimli, hedef odaklı yol izleyerek başarı kat sayısını
+                                arttırır. Pazar araştırmasının ne olduğu nasıl yapıldığı, sürecin aşamaları hepsi bu yazıda.
+                            </p>
+                            <a class="blog-more-btn" href="/pazar-arastirmasi">
+                                Detaylı bilgi edinin<i class="fa fa-long-arrow-right"></i>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+                 <div class="col-md-4">
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <section style="margin-top: 2%;margin-bottom: 2%">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div style="text-align: center;font-weight: 800">
+                        <h1 style="color: #37c6f5">Markanızın Gelişime Açık Yönlerini Tespit Edin!</h1>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div style="text-align: center">
+                        <h2 style="color: black;font-weight: 100">
+                            Markanızın gelişimini negatif yönde etkileyen,
+                            sizi daha fazla satış yapmaktan alıkoyan tüm sorunları
+                            tespit edip ortadan kaldırın. İşe, bayi ve şubelerinizin hizmet kalitesini
+                            firmanıza  özel hazırlanmış bir gizli müşteri projesiyle ölçerek başlayın.
+                            Ardından, doğru yapılmış bir rakip analizi ve sektörel eğitimle daha
+                            fazla satış yapmaya giden yolu kısaltın!
+                        </h2>
+                    </div>
+                </div>
+            </div>
+    </section>
+    <section style="margin-top: 2%;margin-bottom: 2%">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div style="text-align: center">
+                        <h1 style="color: #e6007d;font-weight: 800">Nasıl Çalışır ?</h1>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div style="text-align: center">
+                        <h2 style="color: black;font-weight: 100">
+                            Almak istediğiniz hizmet ne olursa olsun, Oscar Araştırma'nın uzman kadrosu işe
+                            sizi ziyaret ederek başlar. Markanızın vizyon ve misyonu detaylı bir görüşme ile ele
+                            alınır ve markanızla tanışılır.
+                            Gizli Müşteri hizmeti almak istediğinizde, markanıza ait hizmet noktaları ve
+                            personellerinizle ilgili bilgi vermeniz; ideal hizmet beklentilerinizi tanımlamanız istenir.
+                            Bu bilgiler ışığında size özel bir hizmet kalitesi ölçüm formu hazırlanır.
+                            Oscar Araştırma bünyesinde çalışan binlerce gizli müşteriden projenize uygun olanlar seçilir
+                            ve firmanızın ihtiyaçlarına yönelik proje eğitimi verilir.
+                            Saha çalışmasına başlayan birbirinden yetenekli gizli müşteriler, planlanan stratejiler
+                            doğrultusunda yaptıkları denetimlerin sonuçlarını, şube / bayi ziyareti esnasında Oscar
+                            Araştırma'nın mobil uygulaması üzerinden sıcağı sıcağına paylaşırlar. Sıcak temas esnasında
+                            iletilen gözlem sonuçları, diğer araştırma yöntemlerine oranla daha güvenilir bir
+                            kaynak teşkil eder.
+                            Tüm analiz raporları ve hizmet noktası karnelerine, Oscar Araştırma panelinize giriş
+                            yaparak anlık olarak erişebilirsiniz
+                        </h2>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <section id="latest-news" >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="title-area">
+                        <h2 class="title">Oscar Blog'taki En Popüler Yazılar</h2>
+                        <span class="line"></span>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="latest-news-content"  id="news_div">
+                        <div class='row'>
+                            {% for new in news %}
+                                {% if forloop.counter == 4 or forloop.counter == 7 %}
+                                </div><div class='row' style='margin-top:3%'>
+                                {% endif %}
+                                <div class="col-md-4" style="min-height:500px;max-height:500px;">
+                                    <article class="blog-news-single">
+                                        <div class="blog-news-img">
+                                            {%if new.vitrin_photo %}
+                                                <a href="/news/{{new.seolink}}"><img src="{{new.vitrin_photo.url}}" alt="{{new.title}}"></a>
+                                            {%else%}
+                                                <a href="/news/{{new.seolink}}"><img src="{%static 'formtype/home/images/no-image.png' %}" alt="{{new.title}}"></a>
+                                            {%endif%}
+                                        </div>
+                                        <div class="blog-news-title">
+                                            <h2><a href="/news/{{new.seolink}}">{{new.title|safe}}</a></h2>
+                                        </div>
+                                        <div class="blog-news-details" style="min-height:140px;max-height:140px;">
+                                            {% if new.text and new.text|length > 200 %}
+                                                <p>{{new.text|safe|truncatechars:200}}</p>
+                                            {% else %}
+                                                <p> {{new.text|safe}}</p>
+                                            {% endif %}
+                                            {% if new.seolink %}
+                                                <a class="blog-more-btn" href="/news/{{new.seolink}}">Devamını Oku<i class="fa fa-long-arrow-right"></i></a>
+                                            {% else %}
+                                                <a class="blog-more-btn" href="#">Devamını Oku<i class="fa fa-long-arrow-right"></i></a>
+                                            {% endif %}
+                                        </div>
+                                    </article>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+
+    <!-- Start Clients brand -->
+    <section id="clients-brand">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="title-area">
+                        <h2 class="title">Referanslar</h2>
+                        <span class="line"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="company-references-item">
+                        <img class="my_img" src="/media/reference/ikea.png" alt="img">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="company-references-item">
+                        <img class="my_img" src="/media/reference/bambi_yatak.png" alt="img">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="company-references-item">
+                        <img class="my_img" src="/media/reference/alsancak_unlu_mamuller.png" alt="img">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="company-references-item">
+                        <img class="my_img" src="/media/reference/bidolu.png" alt="img">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="company-references-item">
+                        <img class="my_img" src="/media/reference/general_electric.png" alt="img">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="company-references-item">
+                        <img class="my_img" src="/media/reference/ing_bank.png" alt="img">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="company-references-item">
+                        <img class="my_img" src="/media/reference/pizza_house.png" alt="img">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="company-references-item">
+                        <img class="my_img" src="/media/reference/setur.png" alt="img">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="company-references-item">
+                        <img class="my_img" src="/media/reference/torku.png" alt="img">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="company-references-item">
+                        <img class="my_img" src="/media/reference/tugba.png" alt="img">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="company-references-item">
+                        <img class="my_img" src="/media/reference/bisquitte.png" alt="img">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="company-references-item">
+                        <img class="my_img" src="/media/reference/soulmate_coffee.png" alt="img">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="company-references-item">
+                        <img class="my_img" src="/media/reference/komsu_kahve.png" alt="img">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="company-references-item">
+                        <img class="my_img" src="/media/reference/spororjinal.png" alt="img">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="company-references-item">
+                        <img class="my_img" src="/media/reference/dominos.png" alt="img">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="company-references-item">
+                        <img class="my_img" src="/media/reference/columbia.png" alt="img">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="company-references-item">
+                        <img class="my_img" src="/media/reference/pablo.png" alt="img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+  <!-- End Clients brand -->
+
+  {%endblock%}
+
+{% block js %}
+{% endblock %}

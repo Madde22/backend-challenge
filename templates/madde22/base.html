@@ -1,0 +1,423 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="tr">
+
+    <head>
+        {%if seo.title %}
+            <title>{{seo.title}}</title>
+        <meta itemprop="name" content="{{seo.title}}">
+            {%else%}
+        <title> Oscar Araştırma ve Danışmanlık | Gizli Müşteri | Denetim Hizmetleri</title>
+            {%endif%}
+        <meta name="google-site-verification" content="22lm02t58zGcC9bMs0u5bCNwTinf53Ah8E_kIePp_yU" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> {%if seo.description %}
+        <meta name="description" content="{{seo.description}}" />
+        <meta itemprop="description" content="{{seo.description}}"> {%else%}
+        <meta name="description" content="Oscar Araştırma ve Danışmanlık hizmetlerimiz gizli müşteri, gölge müşteri, personel denetimi, bayi denetimi, şube personel eğitimi, mystery shopping" /> {%endif%} {%if seo.keywords %}
+        <meta name="keywords" content="{{seo.keywords}}"> {%else%}
+        <meta name="keywords" content=" Oscar arastirma, denetim, danismanlık, gizli müşteri, gölge müşteri, bayi denetimi, personel denetimi, ek gelir, part time iş, yarı zamanlı, personel eğitimi, mystery shopping, gizli müşteri firma"> {%endif%}
+        <meta name="geo.region" content="TR-35" />
+        <meta name="geo.position" content="38.42306;27.18067" />
+        <meta name="ICBM" content="38.42306, 27.18067" />
+        <!-- Twitter Card data --> {%if seo.twitter_card %}
+        <meta name="twitter:card" content="{{seo.twitter_card}}"> {%endif%} {%if seo.twitter_card %}
+        <meta name="twitter:card" content="{{seo.twitter_card}}"> {%endif%} {%if seo.twitter_site %}
+        <meta name="twitter:site" content="{{seo.twitter_site}}"> {%endif%} {%if seo.twitter_title %}
+        <meta name="twitter:title" content="{{seo.twitter_title}}"> {%endif%} {%if seo.twitter_card %}
+        <meta name="twitter:card" content="{{seo.twitter_card}}"> {%endif%} {%if seo.twitter_description %}
+        <meta name="twitter:description" content="{{seo.twitter_description}}"> {%endif%} {%if seo.twitter_creator %}
+        <meta name="twitter:creator" content="{{seo.twitter_creator}}"> {%endif%} {%if seo.twitter_image %}
+        <meta name="twitter:image" content="{{seo.twitter_image}}"> {%endif%} {%if seo.twitter_data1 %}
+        <meta name="twitter:data1" content="{{seo.twitter_data1}}"> {%endif%} {%if seo.twitter_data2 %}
+        <meta name="twitter:data1" content="{{seo.twitter_data2}}"> {%endif%} {%if seo.twitter_label1 %}
+        <meta name="twitter:creator" content="{{seo.twitter_creator}}"> {%endif%} {%if seo.twitter_label2 %}
+        <meta name="twitter:label2" content="{{seo.twitter_label2}}"> {%endif%}
+        <meta property="og:locale" content="tr_TR" /> {%if seo.og_url %}
+        <meta property="og:creator" content="{{seo.og_url}}"> {%endif%} {%if seo.og_image %}
+        <meta property="og:image" content="{{seo.og_image}}"> {%endif%} {%if seo.og_price_amount %}
+        <meta property="og:price:amount" content="{{seo.og_price_amount}}"> {%endif%} {%if seo.og_price_currency %}
+        <meta property="og:price:currency" content="{{seo.og_price_currency}}"> {%endif%} {%if seo.og_type %}
+        <meta property="og:type" content="{{seo.og_type}}"> {%endif%} {%if seo.og_title %}
+        <meta property="og:title" content="{{seo.og_title}}"> {%endif%} {%if seo.og_description %}
+        <meta property="og:description" content="{{seo.og_description}}"> {%endif%} {%if seo.og_url %}
+        <meta property="og:url" content="{{seo.og_url}}"> {%endif%} {%if seo.og_site_name %}
+        <meta property="og:site_name" content="{{seo.og_site_name}}"> {%endif%} {%if seo.og_description %}
+        <meta property="og:description" content="{{seo.og_url}}"> {%endif%}
+        <meta name="theme-color" content="#ff005a">
+        <link rel="icon" type="image/x-icon" href="{%static 'formtype/home/images/favicon.ico'%}">
+        <link rel="stylesheet" type="text/css" href="{%static 'formtype/home/css/font-awesome.css' %}">
+        <link rel="stylesheet" type="text/css" href="{%static 'formtype/home/css/bootstrap.css' %}">
+        <link rel="stylesheet" type="text/css" href="{%static 'formtype/home/css/slick.css' %}">
+        <link rel="stylesheet" type="text/css" href="{%static 'formtype/home/css/jquery.fancybox.css' %}" media="screen">
+        <link rel="stylesheet" type="text/css" href="{%static 'formtype/home/css/animate.css' %}">
+        <link rel="stylesheet" type="text/css" href="{%static 'formtype/home/css/theme-color/lite-blue-theme.css' %}" id="switcher">
+        <link rel="stylesheet" type="text/css" href="{%static 'formtype/home/css/style.css' %}">
+        <link rel="stylesheet" href="{%static 'formtype/yonetim/plugins/sweetalert/sweetalert2.min.css' %}">
+        <!-- Sweet Alert -->
+        <script src="{%static 'formtype/yonetim/plugins/sweetalert/sweetalert2.min.js' %}"></script>
+        <style>
+            .myclockdiv {
+                font-family: sans-serif;
+                color: #fff;
+                display: inline-block;
+                font-weight: 100;
+                text-align: center;
+                font-size: 20px;
+            }
+
+            .myclockdiv>div {
+                padding: 3px;
+                border-radius: 3px;
+                background: #00BF96;
+                display: inline-block;
+            }
+
+            .myclockdiv div>span {
+                padding: 5px;
+                border-radius: 3px;
+                background: #00816A;
+                display: inline-block;
+            }
+        </style> 
+        {%block css%} 
+            
+        {%endblock%} 
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-125553848-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', 'UA-125553848-1');
+        </script>
+        <style>
+            .collapse,
+            .collapsing {
+                margin-top: 10px;
+                border: 0;
+            }
+
+            @media (max-width: 480px) {
+                .slick-dots {
+                    position: absolute;
+                    top: 80%;
+                    display: block;
+                    width: 100%;
+                    padding: 0;
+                    list-style: none;
+                    text-align: center;
+                }
+
+                .navbar-brand>img {
+                    display: block;
+                    margin-top: -5px;
+                    width: 100px;
+                }
+            }
+
+            @media (max-width: 800px) {
+                .navbar-brand>img {
+                    display: block;
+                    margin-top: -5px;
+                    width: 100px;
+                }
+            }
+
+            .signin-btn {
+                width: 100%;
+            }
+
+            .container>.navbar-header,
+            .container-fluid>.navbar-header,
+            .container>.navbar-collapse,
+            .container-fluid>.navbar-collapse {
+                margin-right: -15px;
+                margin-left: -15px;
+                margin-bottom: 5px;
+            }
+
+            .field-icon {
+                float: right;
+                margin-left: -25px;
+                margin-top: -35px;
+                position: relative;
+                z-index: 2;
+                color: #37c6f5;
+                font-size: x-large;
+            }
+
+            fieldset {
+                display: block;
+                margin-inline-start: 2px;
+                margin-inline-end: 2px;
+                padding-block-start: 0.35em;
+                padding-inline-start: 0.75em;
+                padding-inline-end: 0.75em;
+                padding-block-end: 0.625em;
+                min-inline-size: min-content;
+                border-width: 2px;
+                border-style: groove;
+                border-color: threedface;
+                border-image: initial;
+            }
+
+            legend {
+                display: block;
+                padding-inline-start: 2px;
+                padding-inline-end: 2px;
+                border-width: initial;
+                border-style: none;
+                border-color: initial;
+                border-image: initial;
+                width: auto;
+                margin-bottom: 0;
+                font-size: 12px;
+                font-weight: bold;
+                color: #1f497d;
+            }
+        </style>
+    </head>
+    <body>
+        <noscript>
+            <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NFVH29L" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+        </noscript>
+        <a class="scrollToTop" href="#">
+            <i class="fa fa-angle-up"></i>
+        </a>
+        <section id="menu-area">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <!-- FOR MOBILE VIEW COLLAPSED BUTTON -->
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="{{ROOT}}/">
+                            <img src="{%static 'formtype/home/images/oscar-logo.png' %}" alt="logo" width="200px">
+                        </a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul id="top-menu" class="nav navbar-nav navbar-right main-nav">
+                            <li class="active mynav" id="home" data-parent="#home">
+                                <a href="{{ROOT}}/">ANASAYFA</a>
+                            </li>
+                            <li class="mynav" id="hakkimizda">
+                                <a href="{{ROOT}}/hakkimizda/">Hakkımızda</a>
+                            </li>
+                            <li class="dropdown" id="hizmetlerimiz">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">SUNDUĞUMUZ HİZMETLER <span class="fa fa-angle-down"></span>
+                                </a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li class="mynav" id="gizlimusteri" data-parent="#hizmetlerimiz">
+                                        <a href="{{ROOT}}/gizli-musteri">GİZLİ MÜŞTERİ ARAŞTIRMASI</a>
+                                    </li>
+                                    <li class="mynav" id="pazar_arastirmasi" data-parent="#hizmetlerimiz">
+                                        <a href="{{ROOT}}/pazar-arastirmasi">PAZAR ARAŞTIRMASI</a>
+                                    </li>
+                                    <li class="mynav" id="personel_egitimi" data-parent="#hizmetlerimiz">
+                                        <a href="{{ROOT}}/personel-egitimi">PERSONEL EĞİTİMİ</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="mynav" id="gizlimuserikayit" data-parent="#gizlimuserikayit">
+                                <a href="{{ROOT}}/gizli-musteri-kayit" id="gizlimusteriol">GİZLİ MÜŞTERİ OL</a>
+                            </li>
+                            <li class="mynav" id="iletisim" data-parent="#iletisim">
+                                <a href="{{ROOT}}/iletisim">İLETİŞİM</a>
+                            </li>
+                            <li class="mynav" id="login" data-parent="#iletisim">
+                                <a class="login" id="sisteme_giris" href="{{ ROOT }}/login">SİSTEME GİRİŞ</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--/.nav-collapse -->
+                </div>
+            </nav>
+        </section>
+        <!-- END MENU --> {%block content%} {%endblock%}
+        <!-- Start subscribe us -->
+        <section id="subscribe">
+            <div class="subscribe-overlay">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="subscribe-error"></div>
+                            <div id="subscribe-area" class="subscribe-area">
+                                <h2 class="wow fadeInUp">E-BÜLTENE ABONE OL</h2>
+                                <form id="subscribe-form" class="subscrib-form wow fadeInUp" data-wow-duration="0.5s" data-wow-delay="0.5s">
+                                    <div class="row">
+                                        <div class="col-md-2"></div>
+                                        <div class="col-md-4">
+                                            <div id="myCaptcha" class="g-recaptcha" data-sitekey="6LeOQm8UAAAAADnuv8mk81I-WQARgCr16RtGuuNy"></div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <input type="text" class="myinput" placeholder="Lütfen Eposta Adresinizi Yazınız" name="email">
+                                            <button type="submit" id="subscribe-btn" class="subscribe-btn">KAYIT OL</button>
+                                        </div>
+                                        <div class="col-md-1"></div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End subscribe us -->
+        <!-- Start footer -->
+        <footer id="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-sm-4">
+                        <div class="footer-left">
+                            <i class="fa fa-map-marker"></i>&nbsp;MTK Sitesi, Bornova - İZMİR <br>
+                            <i class="fa fa-envelope"></i>&nbsp;info@oscararastirma.com <br>
+                            <i class="fa fa-phone"></i>&nbsp;+90 (850) 532 94 90 <p>Designed by <a href="https://oscararastirma.com/">Tekin TOPUZ , Oscar Araştırma</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <div class="footer-left">
+                            <ul>
+                                <li>
+                                    <a href="https://oscararastirma.com">Anasayfa</a>
+                                </li>
+                                <li>
+                                    <a href="https://oscararastirma.com/hakkimizda">Hakkımızda</a>
+                                </li>
+                                <li>
+                                    <a href="https://oscararastirma.com/gizli-musteri">Gizli Müşteri</a>
+                                </li>
+                                <li>
+                                    <a href="https://oscararastirma.com/pazar-arastirmasi">Pazar Araştırması</a>
+                                </li>
+                                <li>
+                                    <a href="https://oscararastirma.com/personel-egitimi">Personel Eğitimi</a>
+                                </li>
+                                <li>
+                                    <a href="https://oscararastirma.com/gizli-musteri-kayit">Gizli Müşteri Kayit</a>
+                                </li>
+                                <li>
+                                    <a href="https://oscararastirma.com/iletisim">İletişim</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <div class="footer-right">
+                            <a href="https://www.facebook.com/oscararastirmacom">
+                                <i class="fa fa-facebook fa-2x"></i>
+                            </a>
+                            <a href="https://twitter.com/gizlimusteriyiz">
+                                <i class="fa fa-twitter fa-2x"></i>
+                            </a>
+                            <a href="https://www.instagram.com/oscar_arastirma/">
+                                <i class="fa fa-instagram fa-2x"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- End footer -->
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <!-- Bootstrap -->
+        <script src="{%static 'formtype/home/js/bootstrap.js' %}"></script>
+        <!-- Slick Slider -->
+        <script type="text/javascript" src="{%static 'formtype/home/js/slick.js' %}"></script>
+        <!-- mixit slider -->
+        <script type="text/javascript" src="{%static 'formtype/home/js/jquery.mixitup.js' %}"></script>
+        <!-- Add fancyBox -->
+        <script type="text/javascript" src="{%static 'formtype/home/js/jquery.fancybox.pack.js' %}"></script>
+        <!-- counter -->
+        <script src="{%static 'formtype/home/js/waypoints.js' %}"></script>
+        <script src="{%static 'formtype/home/js/jquery.counterup.js' %}"></script>
+
+        <script type="text/javascript" src="{%static 'formtype/home/js/wow.js' %}"></script>
+        <!-- progress bar   -->
+        <script type="text/javascript" src="{%static 'formtype/home/js/bootstrap-progressbar.js' %}"></script>
+        <!-- Custom js -->
+        <script type="text/javascript" src="{%static 'formtype/home/js/custom.js' %}"></script>
+        <script src='https://www.google.com/recaptcha/api.js'></script>
+        <script>
+            function csrfSafeMethod(method) {
+                // these HTTP methods do not require CSRF protection
+                return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+            }
+
+            function setCookie(cname, cvalue, exdays) {
+                const d = new Date();
+                d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+                let expires = "expires="+d.toUTCString();
+                document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+            }
+            function getCookie(name) {
+                let cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    const cookies = document.cookie.split(';');
+                    for (let i = 0; i < cookies.length; i++) {
+                        const cookie = jQuery.trim(cookies[i]);
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+            const myURL = "{{ROOT}}";
+            $("body").on("click", "#subscribe-btn", function(e) {
+                e.preventDefault();
+                $.ajax({
+                    url: '{{ ROOT }}/subscribe/', // the endpoint
+                    type: 'POST', // http method
+                    data: $('#subscribe-form').serialize(), // data sent with the post request
+                    success: function(response) {
+                        if (response.status === "success") {
+                            $("#subscribe-area").html("<h1><span style='color: green'>" + response.message + "</span></h1>");
+                            $("#signup-content").css("display", "none"); $("#login-content").css("display", "block");
+                        } 
+                        else if (response.status === "error")
+                            $("#subscribe-error").html("<h1><span style='color: red'>" + response.message + "</span></h1>");
+                    },
+                    error: function(response) {
+                        $("#subscribe-error").html("<h1><span style = 'color: red'>" + response.message + "</span></h1>");
+                    }
+                });
+            }).on("change", ".my_il", function(e) {
+                e.preventDefault();
+                let my_html = " <option value='-1'> İlçe Seçiniz </option>";
+                {% for town in towns %}
+                    if ($(this).val() === "{{town.city.id}}")
+                        my_html = my_html + "<option value='{{town.id}}'> {{town.name }}</option>";
+                {% endfor %}
+                    $($(this).data("target")).html(my_html);
+                });
+        </script>
+        <script>
+            if(!getCookie("papara")){
+                $(document).ready(function() {
+                    Swal.fire({
+                    icon: 'warning',
+                    html: '<img class = "image image-responsive" src="{{ ROOT }}/media/oscar_warning.png" alt="no-papara" width = "100%"/>',
+                    width: 600,
+                    }).then(()=>{
+                        setCookie("papara", true, 3);
+                    });
+                })
+            }
+        </script>
+        {%block js%}
+
+        {%endblock%}
+    </body>
+</html>
